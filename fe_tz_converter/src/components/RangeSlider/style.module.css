@@ -1,0 +1,17 @@
+.slider {
+  width: 100%;
+  accent-color: var(--clr-accent);
+}
+
+.dataList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10px;
+}
+.dataList > option {
+  width: 1px;
+  height: 10px;
+  display: flex;
+  justify-content: center;
+}

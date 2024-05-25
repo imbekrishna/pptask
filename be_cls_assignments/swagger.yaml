@@ -1,0 +1,488 @@
+openapi: 3.0.0
+info:
+  title: Classroom Assignments
+  description: API to manage assignments
+  version: 1.0.0
+servers:
+  - url: /
+tags:
+  - name: auth
+    description: User authentication and authorization
+  - name: assignment
+    description: Operations on assignments
+  - name: submission
+    description: Operation on submissions
+  - name: student
+    description: Operation on student
+  - name: user
+    description: Operation on users
+
+paths:
+  /api/auth/login:
+    post:
+      tags:
+        - auth
+      summary: Login
+      description: User login to receive a JWT token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: JohnDoe
+                password:
+                  type: string
+                  example: JohnDoe
+      responses:
+        "200":
+          description: Successful login
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        "401":
+          description: Invalid credentials
+
+  /api/auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register
+      description: Create user in DB
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: JohnDoe
+                password:
+                  type: string
+                  example: JohnDoe
+                email:
+                  type: string
+                  example: johndoe@mail.com
+      responses:
+        "201":
+          description: User created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "400":
+          description: Invalid fields
+        "500":
+          description: Failed to create user
+
+  /api/assignments:
+    get:
+      tags:
+        - assignment
+      summary: Get All Assignments
+      description: Retrieve all assignments from DB
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: query
+          name: filterKey
+          schema:
+            type: string
+          description: Filter assignments by field
+        - in: query
+          name: filterValue
+          schema:
+            type: string
+          description: Filter value
+        - in: query
+          name: sortKey
+          schema:
+            type: string
+          description: Sort assignments by field
+        - in: query
+          name: sortDir
+          schema:
+            type: string
+            enum: [ASC, DESC]
+          description: sort direction
+      responses:
+        "200":
+          description: A list of assignments
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Assignment"
+        "401":
+          description: Authorization token missing
+    post:
+      tags:
+        - assignment
+      summary: Create Assignment
+      description: Create a new assignment
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Create a backend project
+                description:
+                  type: string
+                  example: Should be modular, readable and containerized
+                dueDate:
+                  type: string
+                  format: date
+                  example: 2024-06-01
+      responses:
+        "200":
+          description: Assignment created successfully
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/assignments/{id}:
+    get:
+      tags:
+        - assignment
+      summary: Get Assignment
+      description: Retrieve a single assignment by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Assignment retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    dueDate:
+                      type: string
+                      format: date
+                    createdBy:
+                      type: integer
+        "404":
+          description: Assignment not found
+        "401":
+          description: Authorization token missing
+    put:
+      tags:
+        - assignment
+      summary: Update Assignment
+      description: Update an existing assignment
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  example: Updated assignment title
+                description:
+                  type: string
+                  example: Updated assignment description
+                dueDate:
+                  type: string
+                  format: date
+                  example: 2024-06-05
+      responses:
+        "200":
+          description: Assignment updated successfully
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+    delete:
+      tags:
+        - assignment
+      summary: Delete Assignment
+      description: Delete an existing assignment
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Assignment deleted successfully
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/assignments/{id}/submissions:
+    post:
+      tags:
+        - submission
+      summary: Create Submission
+      description: Create new Submission for given assignment
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                  example: Submission for given assignment
+      responses:
+        "200":
+          description: Assignment submitted successfully
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/submissions/{id}/grade:
+    post:
+      tags:
+        - submission
+      summary: Grade Submission
+      description: Grade submission and add feedback
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                grade:
+                  type: integer
+                  example: 90
+                feedback:
+                  type: string
+                  example: "Good job"
+      responses:
+        "200":
+          description: Submission graded successfully
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/student/{id}/report:
+    post:
+      tags:
+        - student
+      summary: Get report
+      description: Grade a students report
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Submission graded successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  studentId:
+                    type: integer
+                  assignments:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Report"
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/users/{id}:
+    get:
+      tags:
+        - user
+      summary: Get user
+      description: Retrieve a single user by ID
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: User retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Valid id required
+        "404":
+          description: User not not found
+        "401":
+          description: Authorization token missing
+
+  /api/users/{id}/makeTeacher:
+    get:
+      tags:
+        - user
+      summary: Change role
+      description: Change user role to teacher
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Role Updated
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+        "400":
+          description: Valid id required
+        "404":
+          description: User not not found
+        "401":
+          description: Authorization token missing
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        role:
+          type: string
+          default: student
+    Assignment:
+      type: object
+      properties:
+        id:
+          type: integer
+        title:
+          type: string
+        description:
+          type: string
+        dueDate:
+          type: string
+          format: date
+        createdBy:
+          type: integer
+        createdAt:
+          type: string
+          format: date
+        updatedAt:
+          type: string
+          format: date
+    Submission:
+      type: object
+      properties:
+        id:
+          type: integer
+        assignmentId:
+          type: integer
+        studentId:
+          type: integer
+        submissionDate:
+          type: string
+          format: date-time
+        content:
+          type: string
+        grade:
+          type: integer
+        feedback:
+          type: string
+    Report:
+      type: object
+      properties:
+        id:
+          type: integer
+        assignmentId:
+          type: integer
+        grade:
+          type: integer
+        feedback:
+          type: string

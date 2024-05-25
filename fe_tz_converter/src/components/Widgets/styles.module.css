@@ -1,0 +1,68 @@
+.parentWrapper,
+.widgetWrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.widgetWrapper {
+  align-items: center;
+  flex-direction: row;
+}
+
+.dateInput,
+.widgetIcon,
+.linkP {
+  padding: 0.5rem;
+  border: 1px solid var(--clr-divider);
+  border-radius: 0.5rem;
+}
+
+.dateInput{
+  font-size: inherit;
+}
+
+.linkDiv {
+  position: relative;
+}
+
+.linkP {
+  overflow-x: auto;
+  background-color: inherit;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.linkDiv > .widgetIcon {
+  padding: 0;
+  background-color: var(--clr-divider);
+  position: absolute;
+  top: 50%;
+  right: .5rem;
+  transform: translateY(-50%);
+}
+
+.dateInput {
+  flex: 1;
+  color: inherit;
+  font-family: inherit;
+  background-color: inherit;
+}
+
+.widgetIcon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.widgetIcon{
+  transition: all 100ms linear;
+}
+
+.widgetIcon:hover{
+  transform: translateY(-5%);
+}
+
+.widgetIcon:active{
+  transform: scale(0.9);
+}

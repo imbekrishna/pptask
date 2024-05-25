@@ -1,0 +1,21 @@
+services:
+  app:
+    image: <tagname>
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      DB_HOST: <value>
+      DB_PORT: <value>
+      DB_USER: <value>
+      DB_PASSWORD: <value>
+      DB_DATABASE: <value>
+      # mail settings
+      SMTP_HOST: <value>
+      SMTP_PORT: <value>
+      SMTP_USER: <value>
+      SMTP_PASSWORD: <value>
+      # redis host
+      REDIS_URL: <value>
+      SECRET_KEY: <value>
+    network_mode: "host"
