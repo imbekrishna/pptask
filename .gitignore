@@ -150,3 +150,6 @@ rest/
 
 # Docker compose files
 docker-compose*.yml
+
+# SQL session files
+*.session.sql
