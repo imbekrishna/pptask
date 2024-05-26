@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 import HomePage from "./pages/HomePage";
 
-import DarkIcon from "./assets/icons/icon-sun.svg?react";
-import LightIcon from "./assets/icons/icon-moon.svg?react";
+import LightIcon from "./assets/icons/icon-sun.svg?react";
+import DarkIcon from "./assets/icons/icon-moon.svg?react";
 
 import "./App.css";
 
@@ -25,9 +25,9 @@ const App = () => {
       <header>
         <h1>TZ</h1>
         {isDark ? (
-          <LightIcon onClick={() => setIsDark((prev) => !prev)} />
+          <LightIcon tabIndex={0} role="button" onClick={() => setIsDark((prev) => !prev)} />
         ) : (
-          <DarkIcon onClick={() => setIsDark((prev) => !prev)} />
+          <DarkIcon tabIndex={0} role="button" onClick={() => setIsDark((prev) => !prev)} />
         )}
       </header>
       <HomePage />

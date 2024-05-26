@@ -10,9 +10,7 @@ import { luxonValidTimezones } from "../../utils/helpers";
 import styles from "./style.module.css";
 
 const HomePage = () => {
-  const [currentDate, setCurrentDate] = useState(
-    DateTime.now()
-  );
+  const [currentDate, setCurrentDate] = useState(DateTime.now());
   const [selectedTimeZones, setSelectedTimeZones] = useState([
     "Asia/Kolkata",
     "UTC",
@@ -53,12 +51,12 @@ const HomePage = () => {
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
   };
-  
+
   const reverseOrder = () => {
     const tzs = [...selectedTimeZones].reverse();
     setSelectedTimeZones(tzs);
   };
-  
+
   const onSliderChange = (mins, timezone) => {
     setCurrentDate((p) =>
       p.setZone(timezone).set({ hour: parseInt(mins / 60), minute: mins % 60 })
@@ -76,14 +74,12 @@ const HomePage = () => {
   };
 
   const changeDate = (date) => {
-    const updatedDate = date
-      .set({
-        hour: currentDate.hour,
-        minute: currentDate.minute,
-        second: currentDate.second,
-      })
-      .setLocale("en-IN");
-    setCurrentDate(updatedDate);
+    const newDate = DateTime.fromISO(date.toString()).set({
+      hour: currentDate.hour,
+      minute: currentDate.minute,
+      second: currentDate.second,
+    }).setZone("Asia/Kolkata");
+    setCurrentDate(newDate);
   };
 
   return (

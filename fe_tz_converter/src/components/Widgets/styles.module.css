@@ -60,7 +60,7 @@
 }
 
 .widgetIcon:hover{
-  transform: translateY(-5%);
+  transform: translateY(-3px);
 }
 
 .widgetIcon:active{

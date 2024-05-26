@@ -50,21 +50,31 @@ const Widgets = ({
           value={date}
           onChange={handleChange}
         />
-        <div className={styles.widgetIcon} onClick={onTZReverse} role="button">
-          <ReverseIcon/>
+        <div
+          className={styles.widgetIcon}
+          onClick={onTZReverse}
+          tabIndex={0}
+          role="button"
+        >
+          <ReverseIcon />
         </div>
-        <div className={styles.widgetIcon}>
-          <ScheduleIcon/>
+        <div className={styles.widgetIcon} tabIndex={0} role="button">
+          <ScheduleIcon />
         </div>
-        <div className={styles.widgetIcon} onClick={getLink} role="button">
-          <LinkIcon/>
+        <div
+          className={styles.widgetIcon}
+          onClick={getLink}
+          tabIndex={0}
+          role="button"
+        >
+          <LinkIcon />
         </div>
       </div>
       {linkShowing && (
-        <div className={styles.linkDiv} role="button">
+        <div className={styles.linkDiv} tabIndex={0} role="button">
           <div className={styles.linkP}>{shareableLink}</div>
           <div className={styles.widgetIcon} onClick={copyLink} role="button">
-            <ClipboardIcon/>
+            <ClipboardIcon />
           </div>
         </div>
       )}

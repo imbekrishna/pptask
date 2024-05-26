@@ -15,6 +15,7 @@ This project is a RESTful API for managing student assignments. It includes feat
     - [Assignments](#assignments)
     - [Submissions](#submissions)
     - [Users](#users)
+  - [Author](#author)
 
 ## Features
 
@@ -224,3 +225,7 @@ You can also run the application using Docker.
   PATCH http://localhost:3001/api/users/4/makeTeacher
   Authorization: Bearer {{adminAccessToken}}
   ```
+
+## Author
+
+- Website - [Bal Krishna](https:/bkrishna.pages.dev)

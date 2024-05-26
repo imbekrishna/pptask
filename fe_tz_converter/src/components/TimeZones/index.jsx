@@ -98,6 +98,7 @@ const Timezones = ({ localDate, onSliderChange, timezone, removeTimezone }) => {
           <CloseIcon
             className={styles.closeIcon}
             onClick={() => removeTimezone(timezone)}
+            tabIndex={0}
             role="button"
           />
         </div>

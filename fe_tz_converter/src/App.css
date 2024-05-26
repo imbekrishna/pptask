@@ -8,17 +8,17 @@
 
 :root {
   /* colors */
-  --clr-accent: hsl(220, 57%, 56%);
+  --clr-accent: #4f79cf;
 
   /* font */
-  --ff-primary:"Poppins", sans-serif;
+  --ff-primary: "Poppins", sans-serif;
 }
 
 body {
   /* colors light */
   --clr-body-bg: hsl(236, 33%, 92%);
   --clr-item-bg: hsl(0, 0%, 98%);
-  --clr-text: hsl(235, 19%, 35%);
+  --clr-text: #484b6a;
   --clr-status: hsl(236, 9%, 61%);
   --clr-divider: hsl(234, 39%, 85%);
 }
@@ -32,13 +32,23 @@ body.dark {
   --clr-divider: hsl(237, 14%, 26%);
 }
 
+* {
+  outline: none;
+}
+
+*:focus-visible{
+  outline-offset: 3px;
+  outline: 2px solid var(--clr-accent);
+}
+
 body {
   font-family: var(--ff-primary);
   background-color: var(--clr-body-bg);
   color: var(--clr-text);
 }
 
-input, button{
+input,
+button {
   font-family: inherit;
 }
 
@@ -46,7 +56,7 @@ input, button{
   cursor: pointer;
 }
 
-header{
+header {
   padding: 1.5rem 1rem;
   display: flex;
   align-items: center;
