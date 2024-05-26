@@ -48,7 +48,7 @@ This project is a react app that converts time between a set of selected timezon
 <!-- TODO: Add repository link -->
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/pptask.git
+    git clone https://github.com/imbekrishna/pptask.git
     cd pptask/frontend-task
     ```
 2. **Install the dependencies**

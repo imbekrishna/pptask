@@ -37,10 +37,9 @@ This project is a RESTful API for managing student assignments. It includes feat
 
 ## Running Locally
 
-<!-- TODO: Add repository link -->
 1. **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/pptask.git
+    git clone https://github.com/imbekrishna/pptask.git
     cd pptask/backend-task
     ```
 2. **Install the dependencies**
