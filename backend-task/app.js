@@ -1,10 +1,10 @@
 require("express-async-errors");
-const config = require("./utils/config");
 
 const express = require("express");
 const swaggerUI = require("swagger-ui-express");
 const YAML = require("yamljs");
 const cors = require("cors");
+
 // routers
 const authRouter = require("./routes/auth.route");
 const assignmentRouter = require("./routes/assignment.route");
@@ -53,6 +53,4 @@ app.use("/api/users", userRouter);
 app.use(unknownEndpoint);
 app.use(errorHandler);
 
-app.listen(config.port, () => {
-  console.log(`Server listening at http://localhost:${config.port}`);
-});
+module.exports = app;

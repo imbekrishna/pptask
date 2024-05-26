@@ -30,5 +30,32 @@ async function gradeSubmission(req, res) {
 
   res.json({ message: "Submission graded successfully" });
 }
+/**
+ * Controller function to grade a submission
+ * @type {ControllerFunction}
+ */
+async function getSubmissionById(req, res) {
+  const submissionId = req.params.id;
 
-module.exports = { gradeSubmission };
+  const result = await db.query(
+    `SELECT * FROM submissions WHERE submissions.id = ?`,
+    [submissionId]
+  );
+
+  const rows = helper.emptyOrRows(result);
+
+  res.json({ data: rows });
+}
+/**
+ * Controller function to grade a submission
+ * @type {ControllerFunction}
+ */
+async function getAllSubmissions(req, res) {
+  const result = await db.query(`SELECT * from submissions`);
+
+  const rows = helper.emptyOrRows(result);
+
+  res.json({ data: rows });
+}
+
+module.exports = { getSubmissionById, getAllSubmissions, gradeSubmission };

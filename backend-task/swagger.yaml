@@ -182,19 +182,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    id:
-                      type: integer
-                    title:
-                      type: string
-                    description:
-                      type: string
-                    dueDate:
-                      type: string
-                      format: date
-                    createdBy:
-                      type: integer
+                 $ref: "#/components/schemas/Assignment"
         "404":
           description: Assignment not found
         "401":
@@ -257,6 +245,54 @@ paths:
         "401":
           description: Authorization token missing
 
+  /api/submissions:
+    get:
+      tags:
+        - submission
+      summary: Get all submissions
+      description: Get all submission
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Submissions retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Submission"
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/submissions/{id}:
+    get:
+      tags:
+        - submission
+      summary: Get submission
+      description: Get a submission by Id
+      security:
+        - bearerAuth: []
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Submission retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Submission"
+        "403":
+          description: Access denied
+        "401":
+          description: Authorization token missing
+  
   /api/assignments/{id}/submissions:
     post:
       tags:
@@ -354,6 +390,28 @@ paths:
                       $ref: "#/components/schemas/Report"
         "403":
           description: Access denied
+        "401":
+          description: Authorization token missing
+
+  /api/users:
+    get:
+      tags:
+        - user
+      summary: Get all users
+      description: Get all users
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Users retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "404":
+          description: User not not found
         "401":
           description: Authorization token missing
 

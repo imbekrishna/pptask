@@ -47,7 +47,20 @@ async function getUserById(request, response) {
   response.status(200).json({ data });
 }
 
+/**
+ * Controller function for changing role to teacher
+ * @type {ControllerFunction}
+ */
+async function getUsers(request, response) {
+  const rows = await db.query(`select * from users`);
+
+  const data = helper.emptyOrRows(rows);
+
+  response.status(200).json({ data });
+}
+
 module.exports = {
   makeTeacher,
   getUserById,
+  getUsers,
 };
