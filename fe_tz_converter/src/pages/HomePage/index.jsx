@@ -11,7 +11,7 @@ import styles from "./style.module.css";
 
 const HomePage = () => {
   const [currentDate, setCurrentDate] = useState(
-    DateTime.now().setLocale("en-IN")
+    DateTime.now()
   );
   const [selectedTimeZones, setSelectedTimeZones] = useState([
     "Asia/Kolkata",

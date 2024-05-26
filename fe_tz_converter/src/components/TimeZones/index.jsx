@@ -7,12 +7,12 @@ import PropType from "prop-types";
 
 import RangeSlider from "../RangeSlider";
 
-import closeIcon from "../../assets/icons/close.svg";
+import CloseIcon from "../../assets/icons/close.svg?react";
 
 import styles from "./styles.module.css";
 
 const Timezones = ({ localDate, onSliderChange, timezone, removeTimezone }) => {
-  const date = localDate.setZone(timezone).setLocale('en-IN');
+  const date = localDate.setZone(timezone).setLocale("en-IN");
 
   const { attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id: timezone });
@@ -35,7 +35,7 @@ const Timezones = ({ localDate, onSliderChange, timezone, removeTimezone }) => {
     if (!isSliderActive.current) {
       setSliderValue(getMinutes(date));
     }
-    
+
     /* Prevent effect to update the input values if the input is being changed */
     if (!isInputActive.current) {
       setTimeInput(date.toLocaleString(DateTime.TIME_SIMPLE));
@@ -51,14 +51,14 @@ const Timezones = ({ localDate, onSliderChange, timezone, removeTimezone }) => {
 
   const handleTimeChange = (e) => {
     setTimeInput(e.target.value);
-    console.log(e.target.value)
+    console.log(e.target.value);
     const newDate = DateTime.fromFormat(e.target.value, "t", {
       zone: timezone,
       locale: "en-IN",
       setZone: true,
     });
     if (newDate.isValid) {
-      console.log(newDate.isValid)
+      console.log(newDate.isValid);
       onSliderChange(getMinutes(newDate), timezone);
       setTimeInput(newDate.toLocaleString(DateTime.TIME_SIMPLE));
     }
@@ -77,7 +77,7 @@ const Timezones = ({ localDate, onSliderChange, timezone, removeTimezone }) => {
       <div className={styles.contentWrapper}>
         <div className={styles.topContent}>
           <div className={styles.contentDiv}>
-            <h1 className={styles.zoneName}>{`${timezone} | ${date.offsetNameShort}`}</h1>
+            <h1 className={styles.zoneName}>{timezone}</h1>
             <p>{date.offsetNameLong}</p>
           </div>
           <div className={styles.contentDiv}>
@@ -95,11 +95,9 @@ const Timezones = ({ localDate, onSliderChange, timezone, removeTimezone }) => {
             />
             <p>{date.toLocaleString(DateTime.DATE_MED)}</p>
           </div>
-          <img
+          <CloseIcon
             className={styles.closeIcon}
-            src={closeIcon}
             onClick={() => removeTimezone(timezone)}
-            alt=""
             role="button"
           />
         </div>

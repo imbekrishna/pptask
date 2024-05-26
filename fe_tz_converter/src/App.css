@@ -42,12 +42,8 @@ input, button{
   font-family: inherit;
 }
 
-img[role="button"] {
+[role="button"] {
   cursor: pointer;
-}
-
-body.dark img[role="button"]{
-  filter: invert(1);
 }
 
 header{

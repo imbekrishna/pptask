@@ -1,7 +1,8 @@
-import reverseIcon from "../../assets/icons/reverse.svg";
-import scheduleIcon from "../../assets/icons/schedule.svg";
-import clipboardIcon from "../../assets/icons/clipboard.svg";
-import linkIcon from "../../assets/icons/link.svg";
+import ReverseIcon from "../../assets/icons/reverse.svg?react";
+import ScheduleIcon from "../../assets/icons/schedule.svg?react";
+import ClipboardIcon from "../../assets/icons/clipboard.svg?react";
+import LinkIcon from "../../assets/icons/link.svg?react";
+
 import styles from "./styles.module.css";
 import { useState } from "react";
 import { DateTime } from "luxon";
@@ -49,21 +50,21 @@ const Widgets = ({
           value={date}
           onChange={handleChange}
         />
-        <div className={styles.widgetIcon} onClick={onTZReverse}>
-          <img src={reverseIcon} alt="" role="button" />
+        <div className={styles.widgetIcon} onClick={onTZReverse} role="button">
+          <ReverseIcon/>
         </div>
         <div className={styles.widgetIcon}>
-          <img src={scheduleIcon} alt="" role="button" />
+          <ScheduleIcon/>
         </div>
-        <div className={styles.widgetIcon} onClick={getLink}>
-          <img src={linkIcon} alt="" role="button" />
+        <div className={styles.widgetIcon} onClick={getLink} role="button">
+          <LinkIcon/>
         </div>
       </div>
       {linkShowing && (
-        <div className={styles.linkDiv}>
+        <div className={styles.linkDiv} role="button">
           <div className={styles.linkP}>{shareableLink}</div>
-          <div className={styles.widgetIcon} onClick={copyLink}>
-            <img src={clipboardIcon} alt="" role="button" />
+          <div className={styles.widgetIcon} onClick={copyLink} role="button">
+            <ClipboardIcon/>
           </div>
         </div>
       )}
